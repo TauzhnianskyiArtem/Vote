@@ -1,0 +1,5 @@
+<?php
+$methods = [
+    'result' => [
+        'params' => []
+    ]];

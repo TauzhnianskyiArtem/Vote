@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="uk" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Додавання кандидата</title>
+    <link rel="stylesheet" href="frontend/layout/styles/style.css">
+  </head>
+  <body>
+
+<form class="box" action="https://vote.pnit.od.ua/add/candidate" method="post">
+  <h3>Додавання кандидата</h3>
+  <input type="text" name="firstname" placeholder="Ім'я">
+  <input type="text" name="lastname" placeholder="Прізвище">
+  <input type="text" name="structure" placeholder="Група">
+  <input type="text" name="department" placeholder="Інститут">
+  <select name="position" id="">
+    <option disabled>Виберіть позицію</option>
+    <option value="1">ВКІ</option>
+    <option value="2">Голова РСІ</option>
+    <option value="3">Член РСІ</option>
+  </select>
+  <input type="submit" name="" value="Додати">
+</form>
+
+
+  </body>
+</html>

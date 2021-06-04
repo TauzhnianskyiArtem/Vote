@@ -197,16 +197,20 @@ class Main
     public function getresult(): array|null
     {
         $result = [];
-        $headRSIfromDB = Candidate::getRSIHead();
+        $headsRSIfromDB = Candidate::getRSIHeads();
         $membersRSIfromDB = Candidate::getRSIMembers();
 
+        //Випадок, коли два кандидати набрали рівну кількість голосів
+        if ($headsRSIfromDB[0]['votes'] == $headsRSIfromDB[1]['votes'])
+            $result['headRSI'] = $this->getText('9');
+        else
+            $result['headRSI'] = $headsRSIfromDB[0]['lastname'] . " " . $headsRSIfromDB[0]['firstname'];
         $membersRSI = [];
 
         foreach ($membersRSIfromDB as $member) {
             $membersRSI[] = $member['lastname'] . " " . $member['firstname'];
         }
         $result['membersRSI'] = $membersRSI;
-        $result['headRSI'] = $headRSIfromDB[0]['lastname'] . " " . $headRSIfromDB[0]['firstname'];
         return $result;
     }
 

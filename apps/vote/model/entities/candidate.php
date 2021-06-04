@@ -62,10 +62,10 @@ class Candidate
     }
 
 
-    public static function getRSIHead()
+    public static function getRSIHeads()
     {
         $db = self::getDB();
-        return $db->select(['Candidates' => null])->where(['Candidates' =>['position' => 2]])->sort('votes DESC')->many(1);
+        return $db->select(['Candidates' => null])->where(['Candidates' =>['position' => 2]])->sort('votes DESC')->many(2);
     }
 
     public static function getRSIMembers()

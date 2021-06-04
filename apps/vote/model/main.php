@@ -55,14 +55,6 @@ class Main
                             ]
                         ];
                     }
-                } elseif ($value == 'вихід') {
-                    $result = ['type' => 'context', 'set' => null];
-                } else {
-                    $result = [
-                        'to' => $GLOBALS['uni.user'],
-                        'type' => 'message',
-                        'value' => "Сервіс `Вибори` отримав повідомлення $value"
-                    ];
                 }
                 break;
             case 'click':
@@ -147,6 +139,9 @@ class Main
                                 'buttons' => $buttons
                             ]
                         ];
+                        break;
+                    case 'exit':
+                        $result = ['type' => 'context', 'set' => null];
                         break;
                 }
 
@@ -265,4 +260,5 @@ class Main
         $this->registrar = new Registrar();
 
     }
+
 }

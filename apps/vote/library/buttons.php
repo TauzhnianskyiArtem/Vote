@@ -61,6 +61,7 @@ trait Buttons
     {
         $mainButton = '30';
         $buttons = $this->getButtons($mainButton);
+        $buttons [] = [['id' => 'exit', 'title' => 'Вихід']];
         $user_from_db = User::search(guid: $GLOBALS['uni.user'], limit: 1);
         if ($user_from_db == null) {
             $user = new User(guid: $GLOBALS['uni.user'], voted_vki: 0, voted_rsi: 0);

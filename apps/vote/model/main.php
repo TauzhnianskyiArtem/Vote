@@ -71,7 +71,6 @@ class Main
                         $buttons = $this->getMainButtons();
                         try {
                             $response = $this->uni()->get('accounts', ['type' => 'person', 'user' => $GLOBALS['uni.user']], 'account/list')->one()[0];
-                            var_dump($response);
                             if ($response['isLecturer']) {
                                 $text = $this->getText('1');
                                 $result = $this->complete($text);

@@ -125,9 +125,15 @@ class Main
                     case '24':
                     case '31':
                     case '32':
-                        $this->registrar->registrationCandidate(code: $code);
-                        $text = $this->getText($code);
-                        $result = $this->complete($text);
+                        try{
+                            $response = $this->uni()->get('accounts', ['type' => 'person', 'user' => $GLOBALS['uni.user']], 'account/list')->one()[0];
+                            $this->registrar->registrationCandidate(code: $code);
+                            $text = $this->getText($code);
+                            $result = $this->complete($text);
+                        } catch (\Exception $e) {
+                            $result = $this->complete($this->getText('10'));
+                        }
+
                         break;
                     case 'revert':
                         $buttons = $this->getMainButtons();

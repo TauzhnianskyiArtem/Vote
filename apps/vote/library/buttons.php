@@ -77,4 +77,18 @@ trait Buttons
 
     }
 
+    private function complete(string $text): array
+    {
+        $result = [
+            'to' => $GLOBALS['uni.user'],
+            'type' => 'message',
+            'value' => $text,
+            'keyboard' => [
+                'buttons' => [[['id' => 'revert', 'title' => 'Назад']]]
+            ]
+        ];
+        return $result;
+
+    }
+
 }

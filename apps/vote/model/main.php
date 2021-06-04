@@ -33,13 +33,10 @@ class Main
                     $buttons = $this->getMainButtons();
                     try {
                         $response = $this->uni()->get('accounts', ['type' => 'person', 'user' => $GLOBALS['uni.user']], 'account/list')->one()[0];
-                        if ($response['isLecturer'])
-                            $result = [
-                                'to' => $GLOBALS['uni.user'],
-                                'type' => 'message',
-                                'value' => '😏Вибачте, ви Викладач😏',
-                            ];
-                        else
+                        if ($response['isLecturer']) {
+                            $text = $this->getText('1');
+                            $result = $this->complete($text);
+                        } else
                             $result = [
                                 'to' => $GLOBALS['uni.user'],
                                 'type' => 'message',
@@ -74,13 +71,11 @@ class Main
                         $buttons = $this->getMainButtons();
                         try {
                             $response = $this->uni()->get('accounts', ['type' => 'person', 'user' => $GLOBALS['uni.user']], 'account/list')->one()[0];
-                            if ($response['isLecturer'])
-                                $result = [
-                                    'to' => $GLOBALS['uni.user'],
-                                    'type' => 'message',
-                                    'value' => '😏Вибачте, ви Викладач 😏',
-                                ];
-                            else
+                            var_dump($response);
+                            if ($response['isLecturer']) {
+                                $text = $this->getText('1');
+                                $result = $this->complete($text);
+                            } else
                                 $result = [
                                     'to' => $GLOBALS['uni.user'],
                                     'type' => 'message',
@@ -123,16 +118,10 @@ class Main
                         }
 
                         $candidates = $this->getCandidates(department: $department, code: $code);
-                        if (empty($candidates))
-                            $result = [
-                                'to' => $GLOBALS['uni.user'],
-                                'type' => 'message',
-                                'value' => 'Кандидатів не знайдено🙈',
-                                'keyboard' => [
-                                    'buttons' => [[['id' => 'revert', 'title' => 'Назад']]]
-                                ]
-                            ];
-                        else
+                        if (empty($candidates)) {
+                            $text = $this->getText('8');
+                            $result = $this->complete($text);
+                        } else
                             $result = [
                                 'to' => $GLOBALS['uni.user'],
                                 'type' => 'message',
@@ -146,14 +135,8 @@ class Main
                     case '31':
                     case '32':
                         $this->registrar->registrationCandidate(code: $code);
-                        $result = [
-                            'to' => $GLOBALS['uni.user'],
-                            'type' => 'message',
-                            'value' => $this->getText($code),
-                            'keyboard' => [
-                                'buttons' => [[['id' => 'revert', 'title' => 'Назад']]]
-                            ]
-                        ];
+                        $text = $this->getText($code);
+                        $result = $this->complete($text);
                         break;
                     case 'revert':
                         $buttons = $this->getMainButtons();
@@ -184,35 +167,22 @@ class Main
 
 
                     $candidates = $this->getCandidates(department: $department, position: 3);
-                    if (empty($candidates))
+                    if (empty($candidates)) {
+                        $text = $this->getText('8');
+                        $result = $this->complete($text);
+                    } else
                         $result = [
                             'to' => $GLOBALS['uni.user'],
                             'type' => 'message',
-                            'value' => 'Кандидатів не знайдено🙈',
-                            'keyboard' => [
-                                'buttons' => [[['id' => 'revert', 'title' => 'Назад']]]
-                            ]
-                        ];
-                    else
-                        $result = [
-                            'to' => $GLOBALS['uni.user'],
-                            'type' => 'message',
-                            'value' => 'Проголосуйте за члена РСІ',
+                            'value' => $this->getText('5'),
                             'keyboard' => [
                                 'buttons' => $candidates
                             ]
                         ];
                 } elseif ($firstsSymbols == 'vk' || $firstsSymbols == 'rm') {
                     $this->approvalVoice($code);
-
-                    $result = [
-                        'to' => $GLOBALS['uni.user'],
-                        'type' => 'message',
-                        'value' => '🥳Ваш голос додано!!!🥳',
-                        'keyboard' => [
-                            'buttons' => [[['id' => 'revert', 'title' => 'Назад']]]
-                        ]
-                    ];
+                    $text = $this->getText('2');
+                    $result = $this->complete($text);
                 }
 
 
